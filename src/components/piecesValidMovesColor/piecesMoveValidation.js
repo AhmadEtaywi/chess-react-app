@@ -8,7 +8,8 @@ export const piecesMoveValidation = (
   piece,
   squares,
   dispatch,
-  isWhitePiece
+  isWhitePiece,
+  isCheckmateValid
 ) => {
   if (piece === "p" || piece === "P") {
     pawnValidMovesColor(row, col, piece, squares, dispatch);
@@ -17,4 +18,9 @@ export const piecesMoveValidation = (
   } else {
     dispatch({ type: PIECE_VALID_MOVES, pieceMoves: [] });
   }
+
+
+
+  
 };
+

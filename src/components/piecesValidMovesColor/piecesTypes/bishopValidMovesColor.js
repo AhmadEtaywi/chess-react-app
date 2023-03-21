@@ -1,5 +1,4 @@
-import { PIECE_VALID_MOVES } from "../../../redux/constants";
-
+import { PIECE_VALID_MOVES,CHECKMATE } from "../../../redux/constants";
 const isSamePieceColor = (piece, isWhite) => {
   const whitePieces = ["p", "b", "k", "q", "r", "n"];
   const blackPieces = ["P", "B", "K", "Q", "R", "N"];
@@ -13,7 +12,8 @@ const addDiagonalMoves = (
   diagonalColumn,
   isWhitePiece,
   squares,
-  bishopValidMoves
+  bishopValidMoves,
+  dispatch
 ) => {
   let r = row + diagonalRow;
   let c = col + diagonalColumn;
@@ -26,6 +26,12 @@ const addDiagonalMoves = (
       break;
     } else {
       bishopValidMoves.push([r, c]);
+      if ((bishopValidMoves.some(move => squares[move[0]][move[1]] === "K")|| bishopValidMoves.some(move => squares[move[0]][move[1]] === "k"))) {
+        console.log('Checkmate!');
+        alert("CHECKMATE")
+        dispatch({ type: CHECKMATE, checkmate: true });
+
+      }
       break;
     }
 
@@ -33,6 +39,7 @@ const addDiagonalMoves = (
     c += diagonalColumn;
   }
 };
+
 
 export const bishopValidMovesColor = (
   row,
@@ -43,10 +50,10 @@ export const bishopValidMovesColor = (
 ) => {
   const bishopValidMoves = [];
 
-  addDiagonalMoves(row, col, -1, -1, isWhitePiece, squares, bishopValidMoves);
-  addDiagonalMoves(row, col, -1, 1, isWhitePiece, squares, bishopValidMoves);
-  addDiagonalMoves(row, col, 1, -1, isWhitePiece, squares, bishopValidMoves);
-  addDiagonalMoves(row, col, 1, 1, isWhitePiece, squares, bishopValidMoves);
+  addDiagonalMoves(row, col, -1, -1, isWhitePiece, squares, bishopValidMoves, dispatch);
+  addDiagonalMoves(row, col, -1, 1, isWhitePiece, squares, bishopValidMoves, dispatch);
+  addDiagonalMoves(row, col, 1, -1, isWhitePiece, squares, bishopValidMoves, dispatch);
+  addDiagonalMoves(row, col, 1, 1, isWhitePiece, squares, bishopValidMoves, dispatch);
 
   dispatch({ type: PIECE_VALID_MOVES, pieceMoves: bishopValidMoves });
 };

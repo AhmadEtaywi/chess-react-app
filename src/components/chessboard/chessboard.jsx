@@ -21,6 +21,8 @@ const ChessBoard = () => {
   const { historyTo } = useSelector((state) => state);
   const { isCheckmateValid } = useSelector((state) => state);
 
+
+
   const dispatch = useDispatch();
 
   const handleSquareClick = (row, col) => {
@@ -37,9 +39,10 @@ const ChessBoard = () => {
     const firstClick = () => {
       if (selectedSquare) {
         // dispatch({ type: HISTORY_FROM, historyFromItem: [] });
-        dispatch({ type: HISTORY_TO, historyToItem: [] });
-      }  
-      if (isValidPiece && piece !== "" ) {
+        dispatch({ type: HISTORY_TO, historyToItem: ["waiting..."] });
+
+      }
+      if (isValidPiece && piece !== "") {
         piecesMoveValidation(
           row,
           col,
@@ -64,7 +67,7 @@ const ChessBoard = () => {
         firstClick();
       }
     };
-    
+
 
     if (selectedSquare === null) {
       firstClick();
@@ -99,7 +102,7 @@ const ChessBoard = () => {
             className={`${styles.square} ${color}`}
           >
             <div
-              className={isPossibleMoves && isSelected ? styles.test : null}
+              className={isPossibleMoves && isSelected ? styles.PossibleMoves : null}
             ></div>
             <span
               className={`${piecesIcons(piece)} ${pieceColor}`}
@@ -113,27 +116,25 @@ const ChessBoard = () => {
   };
 
   return (
-    <main className={styles.chessboardMain}>
-      
-      <div className={styles.chessboardGame}>
-        <div className={styles.isCheckmate}>
+    <main className={styles.Chess_Board_Main}>
+
+      <div className={styles.Chess_Board_Game}>
+        <div className={styles.is_Check_Mate}>
           {isCheckmateValid ? <h1>CHECKMATE</h1> : null}
         </div>
         <h3
-          className={styles.playerTwo}
+          className={styles.player_Two}
           style={
             turn === "black"
               ? { color: "rgb(18, 224, 18)" }
               : { color: "rgb(255, 0, 0)" }
           }
         >
-          {/* "rgb(18, 224, 18)" green */}
-          {/*  "rgb(255, 0, 0)" red  */}
           Player 2
         </h3>
         <div className={styles.chessboard}>{renderBoard()}</div>
         <h3
-          className={styles.playerOne}
+          className={styles.player_One}
           style={
             turn === "white"
               ? { color: "rgb(18, 224, 18)" }
@@ -145,15 +146,15 @@ const ChessBoard = () => {
         <p>{"\u2654"}</p>
       </div>
 
-      <div className={styles.historyContainer}>
-        <div className={styles.historyFrom}>
+      <div className={styles.History_Container}>
+        <div className={styles.History_From}>
           SOURCE
           {historyFrom.map((historyFromCoordinate) => {
-            
+
             return <div>{`[${historyFromCoordinate.join(", ")}]`}</div>;
           })}
         </div>
-        <div className={styles.historyTo}>
+        <div className={styles.History_To}>
           TARGET
           {historyTo.map((historyToCoordinate) => {
             return <div>{`[${historyToCoordinate.join(", ")}]`}</div>;
