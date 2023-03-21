@@ -48,6 +48,7 @@ body {
 
 .white {
   background-color: rgb(205,133,63)
+  /* background-color: #e3e3e3; */
 }
 
 .black {
@@ -66,6 +67,7 @@ body {
 
 .test {
   background: green;
+  /* background: red; */
   opacity: 50%;
   box-shadow: 1px 1px 10px #000000;
   width: 7rem;
@@ -74,8 +76,17 @@ body {
 }
 
 .historyContainer {
+  /* margin-top: 15rem;
+  display: flex;
+  align-self: flex-start; */
+
+  margin-top: 15rem;
   display: flex;
   align-self: flex-start;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+
 }
 
 .historyFrom,

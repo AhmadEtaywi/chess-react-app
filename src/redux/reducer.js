@@ -27,6 +27,7 @@ const initialState = {
   historyTo: [],
   isCheckmateValid: false,
 };
+console.log(initialState.squares);
 
 const chessReducer = (state = initialState, action) => {
   switch (action.type) {

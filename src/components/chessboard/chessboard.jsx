@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { piecesIcons } from "../piecesIcons/piecesIcons";
 import {
   HISTORY_FROM,
@@ -11,7 +10,6 @@ import {
 import { piecesMoveValidation } from "../piecesValidMovesColor/piecesMoveValidation";
 
 import styles from "./chessboard.module.css";
-
 
 const ChessBoard = () => {
   const squares = useSelector((state) => state.squares);
@@ -113,20 +111,7 @@ const ChessBoard = () => {
 
   return (
     <main className={styles.chessboardMain}>
-      <div className={styles.historyContainer}>
-        <div className={styles.historyFrom}>
-          SOURCE
-          {historyFrom.map((historyFromCoordinate) => {
-            return <div>{`[${historyFromCoordinate.join(", ")}]`}</div>;
-          })}
-        </div>
-        <div className={styles.historyTo}>
-          TARGET
-          {historyTo.map((historyToCoordinate) => {
-            return <div>{`[${historyToCoordinate.join(", ")}]`}</div>;
-          })}
-        </div>
-      </div>
+      
       <div className={styles.chessboardGame}>
         <div className={styles.isCheckmate}>
           {isCheckmateValid ? <h1>CHECKMATE</h1> : null}
@@ -154,8 +139,24 @@ const ChessBoard = () => {
         >
           Player 1
         </h3>
-        <p >{'\u2654'}</p>
+        <p>{"\u2654"}</p>
       </div>
+
+      <div className={styles.historyContainer}>
+        <div className={styles.historyFrom}>
+          SOURCE
+          {historyFrom.map((historyFromCoordinate) => {
+            return <div>{`[${historyFromCoordinate.join(", ")}]`}</div>;
+          })}
+        </div>
+        <div className={styles.historyTo}>
+          TARGET
+          {historyTo.map((historyToCoordinate) => {
+            return <div>{`[${historyToCoordinate.join(", ")}]`}</div>;
+          })}
+        </div>
+      </div>
+
     </main>
   );
 };
