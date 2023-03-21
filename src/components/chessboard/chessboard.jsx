@@ -36,10 +36,10 @@ const ChessBoard = () => {
 
     const firstClick = () => {
       if (selectedSquare) {
-        dispatch({ type: HISTORY_FROM, historyFromItem: [] });
+        // dispatch({ type: HISTORY_FROM, historyFromItem: [] });
         dispatch({ type: HISTORY_TO, historyToItem: [] });
-      }
-      if (isValidPiece && piece !== "") {
+      }  
+      if (isValidPiece && piece !== "" ) {
         piecesMoveValidation(
           row,
           col,
@@ -56,12 +56,15 @@ const ChessBoard = () => {
 
     const secondClick = () => {
       if (isOpponentPiece || piece === "") {
-        dispatch({ type: HISTORY_TO, historyToItem: [row, col] });
-        dispatch({ type: MOVE_TO, square: [row, col] });
+        if (pieceValidMoves.some((validMove) => validMove[0] === row && validMove[1] === col)) {
+          dispatch({ type: HISTORY_TO, historyToItem: [row, col] });
+          dispatch({ type: MOVE_TO, square: [row, col] });
+        }
       } else {
         firstClick();
       }
     };
+    
 
     if (selectedSquare === null) {
       firstClick();
@@ -146,6 +149,7 @@ const ChessBoard = () => {
         <div className={styles.historyFrom}>
           SOURCE
           {historyFrom.map((historyFromCoordinate) => {
+            
             return <div>{`[${historyFromCoordinate.join(", ")}]`}</div>;
           })}
         </div>
