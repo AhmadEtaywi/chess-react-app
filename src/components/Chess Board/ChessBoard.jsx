@@ -9,7 +9,7 @@ import {
 } from "../../redux/constants";
 import { piecesMoveValidation } from "../piecesValidMovesColor/piecesMoveValidation";
 
-import styles from "./chessboard.module.css";
+import styles from "./ChessBoard.module.css";
 
 const ChessBoard = () => {
   const squares = useSelector((state) => state.squares);
@@ -20,8 +20,6 @@ const ChessBoard = () => {
   const { historyFrom } = useSelector((state) => state);
   const { historyTo } = useSelector((state) => state);
   const { isCheckmateValid } = useSelector((state) => state);
-
-
 
   const dispatch = useDispatch();
 
@@ -38,9 +36,7 @@ const ChessBoard = () => {
 
     const firstClick = () => {
       if (selectedSquare) {
-        // dispatch({ type: HISTORY_FROM, historyFromItem: [] });
         dispatch({ type: HISTORY_TO, historyToItem: ["waiting..."] });
-
       }
       if (isValidPiece && piece !== "") {
         piecesMoveValidation(
@@ -59,7 +55,11 @@ const ChessBoard = () => {
 
     const secondClick = () => {
       if (isOpponentPiece || piece === "") {
-        if (pieceValidMoves.some((validMove) => validMove[0] === row && validMove[1] === col)) {
+        if (
+          pieceValidMoves.some(
+            (validMove) => validMove[0] === row && validMove[1] === col
+          )
+        ) {
           dispatch({ type: HISTORY_TO, historyToItem: [row, col] });
           dispatch({ type: MOVE_TO, square: [row, col] });
         }
@@ -67,7 +67,6 @@ const ChessBoard = () => {
         firstClick();
       }
     };
-
 
     if (selectedSquare === null) {
       firstClick();
@@ -102,7 +101,9 @@ const ChessBoard = () => {
             className={`${styles.square} ${color}`}
           >
             <div
-              className={isPossibleMoves && isSelected ? styles.PossibleMoves : null}
+              className={
+                isPossibleMoves && isSelected ? styles.PossibleMoves : null
+              }
             ></div>
             <span
               className={`${piecesIcons(piece)} ${pieceColor}`}
@@ -117,11 +118,7 @@ const ChessBoard = () => {
 
   return (
     <main className={styles.Chess_Board_Main}>
-
-      <div className={styles.Chess_Board_Game}>
-        <div className={styles.is_Check_Mate}>
-          {isCheckmateValid ? <h1>CHECKMATE</h1> : null}
-        </div>
+      <div className={styles.player_Name}>
         <h3
           className={styles.player_Two}
           style={
@@ -132,8 +129,8 @@ const ChessBoard = () => {
         >
           Player 2
         </h3>
-        <div className={styles.chessboard}>{renderBoard()}</div>
-        <h3
+
+   <h3
           className={styles.player_One}
           style={
             turn === "white"
@@ -143,14 +140,40 @@ const ChessBoard = () => {
         >
           Player 1
         </h3>
-        <p>{"\u2654"}</p>
+
+      </div>
+      <div className={styles.Chess_Board_Game}>
+        <div className={styles.is_Check_Mate}>
+          {isCheckmateValid ? <h1>CHECKMATE</h1> : null}
+        </div>
+        {/* <h3
+          className={styles.player_Two}
+          style={
+            turn === "black"
+              ? { color: "rgb(18, 224, 18)" }
+              : { color: "rgb(255, 0, 0)" }
+          }
+        >
+          Player 2
+        </h3> */}
+        <div className={styles.chessboard}>{renderBoard()}</div>
+        {/* <h3
+          className={styles.player_One}
+          style={
+            turn === "white"
+              ? { color: "rgb(18, 224, 18)" }
+              : { color: "rgb(255, 0, 0)" }
+          }
+        >
+          Player 1
+        </h3> */}
+        {/* <p>{"\u2654"}</p> */}
       </div>
 
       <div className={styles.History_Container}>
         <div className={styles.History_From}>
           SOURCE
           {historyFrom.map((historyFromCoordinate) => {
-
             return <div>{`[${historyFromCoordinate.join(", ")}]`}</div>;
           })}
         </div>
@@ -161,7 +184,6 @@ const ChessBoard = () => {
           })}
         </div>
       </div>
-
     </main>
   );
 };

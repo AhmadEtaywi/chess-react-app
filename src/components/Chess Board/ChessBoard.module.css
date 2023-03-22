@@ -1,6 +1,12 @@
-body {
-  background-color: rgb(50, 50, 60);
+.player_Name{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 5rem;
+}
 
+body {
+  background-color:darkslategrey
 }
 
 .Chess_Board_Main {
@@ -45,15 +51,14 @@ body {
   width: 7rem;
   height: 7rem;
 }
-
+/* white square */
 .white {
   background-color: rgb(205,133,63)
 }
-
+/* black square */
 .black {
-  background-color: rgb(139,69,19)
+  background-color: rgb(139,69,19);
 
-  ;
 }
 
 .whitePiece {
@@ -74,7 +79,7 @@ body {
 }
 
 .History_Container {
-  margin-top: 15rem;
+  margin-top: 8rem;
   display: flex;
   align-self: flex-start;
   border: 1px solid #ccc;

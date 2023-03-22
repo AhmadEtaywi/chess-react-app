@@ -18,9 +18,4 @@ export const piecesMoveValidation = (
   } else {
     dispatch({ type: PIECE_VALID_MOVES, pieceMoves: [] });
   }
-
-
-
-  
 };
-

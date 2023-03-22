@@ -27,7 +27,6 @@ const addDiagonalMoves = (
     } else {
       bishopValidMoves.push([r, c]);
       if ((bishopValidMoves.some(move => squares[move[0]][move[1]] === "K")|| bishopValidMoves.some(move => squares[move[0]][move[1]] === "k"))) {
-        console.log('Checkmate!');
         alert("CHECKMATE")
         dispatch({ type: CHECKMATE, checkmate: true });
 

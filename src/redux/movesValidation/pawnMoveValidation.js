@@ -22,8 +22,6 @@ export const isPawnMoveValid = (
         toPiece === ""
         
       ) {
-  // alert ("CHECKMATE")
-
         return true;
       }
       break;
@@ -47,19 +45,13 @@ export const isPawnMoveValid = (
       return false;
   }
 
-/* start testing king dead */
-
-  if (rowDiff === 1 && colDiff === 1 && toPiece !== "" && toPiece === "K") { // for the black king
-    
-  alert (" black King killed , Player 1 WIN ") // important
+  if (rowDiff === 1 && colDiff === 1 && toPiece !== "" && toPiece === "K") { 
+  alert (" The  Black King is Dead , Player 1 WIN ") 
   window.location.reload()
-
-
     return true;
   }
-  else  if (rowDiff === 1 && colDiff === 1 && toPiece !== "" && toPiece === "k") { // for the white king
-    
-    alert (" white King killed , Player 2 WIN ") // important
+  else  if (rowDiff === 1 && colDiff === 1 && toPiece !== "" && toPiece === "k") {    
+    alert (" The White King is Dead , Player 2 WIN ") 
     window.location.reload()
       return true;
     }
@@ -68,9 +60,6 @@ export const isPawnMoveValid = (
       return true
     }
   }
-
-/* end testing king dead */
-
 
   return false;
 };
